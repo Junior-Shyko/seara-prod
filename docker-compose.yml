@@ -26,7 +26,7 @@ services:
           memory: 512M
 
   php:
-    image: junioroliveira/seara:1.0.3
+    image: junioroliveira/seara:1.1.2
     container_name: searaprodphp
     volumes:
       - ./storage:/var/www/storage
@@ -34,6 +34,9 @@ services:
       - public_files:/var/www/public
     environment:
       # Configurações Laravel
+      - VIRTUAL_HOST=${VIRTUAL_HOST}
+      - LETSENCRYPT_HOST=${LETSENCRYPT_HOST}
+      - LETSENCRYPT_EMAIL=${LETSENCRYPT_EMAIL}
       - APP_ENV=production
       - APP_DEBUG=false
       - APP_KEY=${APP_KEY:-base64:QyiI3LdTQcnGk8uGFEvl2hfyLUBdAu4A88TvD5NZt4E=}
