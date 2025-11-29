@@ -34,9 +34,6 @@ services:
       - public_files:/var/www/public
     environment:
       # Configurações Laravel
-      - VIRTUAL_HOST=${VIRTUAL_HOST}
-      - LETSENCRYPT_HOST=${LETSENCRYPT_HOST}
-      - LETSENCRYPT_EMAIL=${LETSENCRYPT_EMAIL}
       - APP_ENV=production
       - APP_DEBUG=false
       - APP_KEY=${APP_KEY:-base64:QyiI3LdTQcnGk8uGFEvl2hfyLUBdAu4A88TvD5NZt4E=}
@@ -75,6 +72,10 @@ services:
     volumes:
       - public_files:/var/www/public:ro
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    environment:
+      - VIRTUAL_HOST=${VIRTUAL_HOST}
+      - LETSENCRYPT_HOST=${LETSENCRYPT_HOST}
+      - LETSENCRYPT_EMAIL=${LETSENCRYPT_EMAIL}
     depends_on:
       php:
         condition: service_healthy
